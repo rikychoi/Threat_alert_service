@@ -1,5 +1,5 @@
 [DATABASE]
-URL=mysql+pymysql://darklight:darklight@mariadb:3306/darklight
+URL=mysql+pymysql://darklight:1234@mariadb:3306/darklight
 DEBUG=false
 
 [ELASTICSEARCH]

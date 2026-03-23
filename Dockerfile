@@ -13,11 +13,11 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-ADD https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 /tmp/
+    #ADD https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 /tmp/
 
-RUN tar -xvjf /tmp/phantomjs-2.1.1-linux-x86_64.tar.bz2 phantomjs-2.1.1-linux-x86_64/bin/phantomjs \
-    && mv phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/bin/ \
-    && rm /tmp/phantomjs-2.1.1-linux-x86_64.tar.bz2 \
-    && rm -rf phantomjs-2.1.1-linux-x86_64
+#RUN tar -xvjf /tmp/phantomjs-2.1.1-linux-x86_64.tar.bz2 phantomjs-2.1.1-linux-x86_64/bin/phantomjs \
+   # && mv phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/bin/ \
+   # && rm /tmp/phantomjs-2.1.1-linux-x86_64.tar.bz2 \
+   # && rm -rf phantomjs-2.1.1-linux-x86_64
 
 CMD ["python", "run_sources.py"]

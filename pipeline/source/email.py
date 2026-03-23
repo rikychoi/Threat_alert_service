@@ -22,7 +22,7 @@ email_identifier = Table('email_identifier', Base.metadata,
 class Email(Base):
     __tablename__ = 'emails'
     id = Column(Integer, primary_key=True)
-    email = Column(String(1024), unique=True)
+    email = Column(String(255), unique=True)
     domains = relationship('Domain', secondary=email_identifier)
 
 

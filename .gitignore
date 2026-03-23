@@ -112,3 +112,6 @@ venv.bak/
 
 # pycharm config file
 .idea/
+
+backup/
+.venv-1/
