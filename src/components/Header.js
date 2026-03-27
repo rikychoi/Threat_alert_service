@@ -3,7 +3,7 @@ import './Header.css';
 
 const NAV_ITEMS = [
   { label: '서비스 소개', to: '/service' },
-  { label: '유출정보 조회하기', to: '/' },
+  { label: '유출정보 조회하기', to: '/search' },
   { label: '알림 받기', to: '/alert' },
   { label: '공지사항', to: '/notice' },
   { label: '마이페이지', to: '/mypage' },
