@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import engine
 from app.models import base
-from app.routers import check, posts, dashboard, internal
+from app.routers import check, posts, dashboard, internal, categories, sources
 
 
 base.Base.metadata.create_all(bind=engine)
@@ -30,8 +30,10 @@ app.add_middleware(
 
 
 app.include_router(check.router, prefix="/api/check", tags=["유출 조회"])
+app.include_router(categories.router, prefix="/api/categories", tags=["카테고리"])
 app.include_router(posts.router, prefix="/api/posts", tags=["게시물"])
 app.include_router(dashboard.router, prefix="/api/dashboard", tags=["대시보드"])
+app.include_router(sources.router, prefix="/api/sources", tags=["소스 관리"])
 app.include_router(internal.router, prefix="/api/internal", tags=["내부용"])
 
 

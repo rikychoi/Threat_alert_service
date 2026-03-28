@@ -1,4 +1,4 @@
-#게시물 관련 요청/응답 형식 정의
+# 게시물 관련 요청/응답 형식 정의
 from datetime import datetime
 from typing import Optional, List, Dict, Any
 
@@ -29,6 +29,11 @@ class PostResponse(BaseModel):
     category: str
     tags: Optional[List[str]]
     victim_info: Optional[Dict[str, Any]]
+    original_url: Optional[str]
+    group: Optional[str] = None
+    country: Optional[str] = None
+    domain: Optional[str] = None
+    screenshot: Optional[str] = None
     created_at: datetime
 
     model_config = {"from_attributes": True}
