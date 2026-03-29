@@ -20,8 +20,9 @@ def run(source):
         Log.i("Trying to run {} source".format(_class.name))
         try:
             _class.collect()
-        except:
+        except Exception:
             Log.e("Failed to collect data from {} source".format(_class.name))
+
         if _class.urls:
             _class.save()
     else:
@@ -46,17 +47,21 @@ def main():
 
         if status:
             # register a scheduler for running periodically. (only for active source)
-            scheduler.add_job(run, "interval",
-                              minutes=source().cycle, id=str(job_id),
-                              args=(source, ))
+            scheduler.add_job(
+                run,
+                "interval",
+                minutes=source().cycle,
+                id=str(job_id),
+                args=(source,)
+            )
             Log.i("Successfully add a new job")
-
             job_id += 1
 
     while True:
-        time.sleep(60)  # sleep 1 mintue for running scheduler normally.
+        time.sleep(60)  # sleep 1 minute for running scheduler normally.
 
     scheduler.shutdown()
+
 
 if __name__ == "__main__":
     main()
