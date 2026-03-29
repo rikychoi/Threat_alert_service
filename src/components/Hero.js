@@ -27,6 +27,7 @@ export default function Hero() {
     }
 
     loadCategories();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- 카테고리 목록은 마운트 시 1회만 로드
   }, []);
 
   const validateCategory = (value) => {

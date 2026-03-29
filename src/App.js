@@ -5,7 +5,7 @@ import Hero from './components/Hero';
 import ServiceIntroPage from './pages/ServiceIntroPage';
 import AlertPage from './pages/AlertPage';
 import NoticePage from './pages/NoticePage';
-import MyPage from './pages/MyPage';
+import DashboardPage from './pages/DashboardPage';
 import './App.css';
 
 export default function App() {
@@ -24,7 +24,8 @@ export default function App() {
           <Route path="/service" element={<ServiceIntroPage />} />
           <Route path="/alert" element={<AlertPage />} />
           <Route path="/notice" element={<NoticePage />} />
-          <Route path="/mypage" element={<MyPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/mypage" element={<Navigate to="/dashboard" replace />} />
           <Route path="/search" element={<Navigate to="/" replace />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
