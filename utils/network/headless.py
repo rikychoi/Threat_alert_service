@@ -17,6 +17,14 @@ from utils.logging.log import Log
 import json
 
 
+class InvalidURLException(Exception):
+    """Raised when the browser cannot load a given URL."""
+
+
+class InvalidHTMLException(Exception):
+    """Raised when the fetched page content is not valid/unusable."""
+
+
 class HeadlessBrowser:
     """Selenium headless browser for crawling information."""
 
@@ -49,11 +57,11 @@ class HeadlessBrowser:
         except:
             # browser scan failed
             Log.e("Browser has an error.")
-            return
+            raise InvalidURLException(f"Failed to load url: {url}")
 
         # if driver source is none
         if not self.get_source():
-            return
+            raise InvalidHTMLException("Empty or invalid page source")
 
         # run HTML parser for parse data from source
         try:
@@ -62,7 +70,7 @@ class HeadlessBrowser:
         except:
             # website source code is not HTML
             Log.e("Invalid HTML Source code.")
-            return
+            raise InvalidHTMLException("Invalid HTML Source code")
 
         # get HAR from driver
         self.har = json.loads(self.driver.get_log('har')[0]['message'])
@@ -164,5 +172,10 @@ class HeadlessBrowser:
             return f.getvalue()
 
     def __del__(self):
-        self.driver.quit()
+        # If __init__ failed, `driver` may not exist.
+        if hasattr(self, "driver"):
+            try:
+                self.driver.quit()
+            except Exception:
+                pass
         del self

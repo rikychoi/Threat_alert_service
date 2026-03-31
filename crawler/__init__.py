@@ -1,4 +1,5 @@
 from utils.network.headless import HeadlessBrowser
+from utils.network.headless import InvalidURLException, InvalidHTMLException
 from utils.network.socket import Socket
 from utils.logging.log import Log
 from utils.type.dynamic import DynamicObject
@@ -33,22 +34,44 @@ class Crawler:
         Log.i("Trying to crawl {} url".format(url))
 
         domain = urlparse(url).netloc
-        obj = DynamicObject()
+        obj = DynamicObject({
+            "meta": {
+                "url": url,
+                "domain": domain,
+                "status": "started",
+            }
+        })
 
         # Step 1. Visit website using headless tor browser
         Log.d("Step 1. Visiting {} website using headless browser".format(url))
 
-        browser = HeadlessBrowser(
-            ini=self.ini,
-            tor_network=True
-        )
-
-        report = browser.run(url)
-
-        del browser
+        browser = None
+        report = None
+        try:
+            browser = HeadlessBrowser(
+                ini=self.ini,
+                tor_network=True
+            )
+            report = browser.run(url)
+        except (InvalidURLException, InvalidHTMLException) as e:
+            obj.meta["status"] = "failed"
+            obj.meta["error_type"] = type(e).__name__
+            obj.meta["error_message"] = str(e)
+            return obj
+        except Exception as e:
+            obj.meta["status"] = "failed"
+            obj.meta["error_type"] = type(e).__name__
+            obj.meta["error_message"] = str(e)
+            return obj
+        finally:
+            if browser is not None:
+                del browser
 
         # if browser have an exception return from here
         if not report:
+            obj.meta["status"] = "failed"
+            obj.meta["error_type"] = "EmptyReport"
+            obj.meta["error_message"] = "Headless browser returned no report"
             return obj
 
         obj.webpage = report
@@ -59,6 +82,7 @@ class Crawler:
 
         # Step 3. TO-DO
 
+        obj.meta["status"] = "success"
         return obj
 
     def _portscan(self, domain):
@@ -105,6 +129,11 @@ class Crawler:
     def save(self, id, obj):
         """Save crawled data into database."""
         Log.i("Saving crawled data")
+
+        # If scan failed, there is nothing to persist in DB/Elastic in the current model.
+        if not getattr(obj, "webpage", None):
+            Log.e("No webpage data to save; skipping persistence.")
+            return
 
         meta = {
             'id': id,

@@ -1,6 +1,11 @@
 from utils.config.ini import Ini
 from utils.network.socket import Socket
 
+import pytest
+
+
+pytestmark = pytest.mark.integration
+
 
 def test_ping_check():
     with Socket() as socket:

@@ -5,6 +5,9 @@ from utils.network.headless import InvalidURLException, InvalidHTMLException
 import pytest
 
 
+pytestmark = pytest.mark.integration
+
+
 ini = Ini('files/config.ini')
 
 

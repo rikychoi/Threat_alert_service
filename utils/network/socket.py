@@ -32,7 +32,10 @@ class Socket:
                 sock.connect((address, port))
                 return True
             except Exception as e:
-                if count > 10 or '0x05' in e.msg:
+                # Some socket exceptions (e.g. gaierror) don't have `msg`.
+                # Use string representation to keep retry/stop logic working.
+                msg = getattr(e, "msg", "") or str(e)
+                if count > 10 or '0x05' in msg:
                     return False
 
                 return self.ping_check(address, port, count+1)

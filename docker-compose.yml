@@ -14,10 +14,13 @@ services:
     image: darklight:latest
     container_name: scheduler
     environment:
-      - CONFIG_FILE=config.ini
+      - CONFIG_FILE=files/config.ini
     networks:
       - darklight
       - database
+    depends_on:
+      - redis
+      - torproxy
 
   worker:
     build:
@@ -27,10 +30,13 @@ services:
     container_name: worker
     command: ["celery", "worker", "-A", "crawler.tasks", "--autoscale=1,7"]
     environment:
-      - CONFIG_FILE=config.ini
+      - CONFIG_FILE=files/config.ini
     networks:
       - darklight
       - database
+    depends_on:
+      - redis
+      - torproxy
 
   redis:
     image: redis:latest
@@ -38,9 +44,26 @@ services:
     networks:
       - darklight
 
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: darklight:latest
+    container_name: darklight-test
+    command: ["python", "-m", "pytest", "-q", "-m", "not integration"]
+    environment:
+      - CONFIG_FILE=files/config.ini
+    depends_on:
+      - redis
+      - torproxy
+      - mariadb
+      - elasticsearch
+    networks:
+      - darklight
+      - database
+
 networks:
   darklight:
     name: darklight
   database:
-    external:
-      name: database
+    name: database

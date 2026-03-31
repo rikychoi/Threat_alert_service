@@ -3,6 +3,11 @@ from crawler import Crawler
 from utils.config.ini import Ini
 from utils.type.dynamic import DynamicObject
 
+import pytest
+
+
+pytestmark = pytest.mark.integration
+
 
 def test_load_crawler():
     ini = Ini('files/config.ini')

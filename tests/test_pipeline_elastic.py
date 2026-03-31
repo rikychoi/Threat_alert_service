@@ -4,8 +4,12 @@ from pipeline.elastic.documents import Webpage, Service, Port
 from utils.config.ini import Ini
 from utils.config.env import Env
 
+import pytest
+
 
 ini = Ini(Env.read('CONFIG_FILE'))
+
+pytestmark = pytest.mark.integration
 
 
 def test_start_connection():

@@ -5,8 +5,12 @@ from database.models import Domain
 from utils.config.env import Env
 from utils.config.ini import Ini
 
+import pytest
+
 
 ini = Ini(Env.read('CONFIG_FILE'))
+
+pytestmark = pytest.mark.integration
 
 
 def test_create_engine():

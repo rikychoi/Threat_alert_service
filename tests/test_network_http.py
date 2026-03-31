@@ -1,6 +1,11 @@
 from utils.config.ini import Ini
 from utils.network.http import HTTP
 
+import pytest
+
+
+pytestmark = pytest.mark.integration
+
 
 def test_http():
     response = HTTP().request(
