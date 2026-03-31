@@ -193,7 +193,7 @@ export default function Hero() {
             </div>
           ) : (
             <div className="bg-green-500/20 backdrop-blur-sm border border-green-400/30 rounded-2xl px-7 py-5">
-              <p className="text-green-500 text-xl font-bold mb-1">✓ 안전합니다</p>
+              <p className="text-green-600 text-xl font-bold mb-1">✓ 안전합니다</p>
               <p className="text-white">
                 선택된 분류 ({category})는 현재 수집된 유출 데이터에서 발견되지 않았습니다.
               </p>
