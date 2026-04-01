@@ -131,7 +131,7 @@ export default function DashboardPage() {
     const ok =
       a.is_success === 1 || a.is_success === true ? '성공' : '실패';
     const sent = a.sent_at
-      ? new Date(a.sent_at).toLocaleString('ko-KR')
+      ? new Date(a.sent_at).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })
       : '—';
     return { key: a.id ?? `${channel}-${sent}`, channel, ok, sent };
   };
