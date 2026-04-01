@@ -121,7 +121,7 @@ export default function DashboardPage() {
     const title = p.title || p.name || '—';
     const cat = p.category ?? '—';
     const created = p.created_at
-      ? new Date(p.created_at).toLocaleString('ko-KR')
+      ? new Date(p.created_at).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })
       : '—';
     return { key: p.id ?? `${title}-${created}`, title, cat, created };
   };
