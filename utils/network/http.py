@@ -13,9 +13,10 @@ from utils.logging.log import Log
 class HTTP:
     """HTTP Communication class for request & response from remote HTTP server."""
     @classmethod
-    def request(cls, url, tor_network=False, ini=None, timeout=300):
+    def request(cls, url, tor_network=False, ini=None, timeout=300, headers=None):
         """Request URL and get response header and body"""
         try:
+            merged_headers = {**cls._generate_custom_http_header(), **(headers or {})}
             if tor_network:
                 if not ini:
                     raise ValueError("Config file not found")
@@ -24,9 +25,9 @@ class HTTP:
                     ini.read('TOR', 'HOST'),
                     ini.read('TOR', 'PORT'))
                 proxies = {'http': server, 'https': server}
-                return requests.get(url, timeout=timeout, proxies=proxies, headers=cls._generate_custom_http_header())
+                return requests.get(url, timeout=timeout, proxies=proxies, headers=merged_headers)
             else:
-                return requests.get(url, timeout=timeout, headers=cls._generate_custom_http_header())
+                return requests.get(url, timeout=timeout, headers=merged_headers)
         except Exception as e:
             Log.e("Exception at HTTP.request\n{}".format(e))
 
