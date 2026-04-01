@@ -120,8 +120,10 @@ export default function DashboardPage() {
   const formatPostRow = (p) => {
     const title = p.title || p.name || '—';
     const cat = p.category ?? '—';
-    const created = p.created_at
-      ? new Date(p.created_at).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })
+    const createdRaw = p.created_at;
+    const created = createdRaw
+      ? new Date(/Z|[+-]\d{2}:?\d{2}$/.test(createdRaw) ? createdRaw : createdRaw + 'Z')
+          .toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })
       : '—';
     return { key: p.id ?? `${title}-${created}`, title, cat, created };
   };
@@ -130,8 +132,10 @@ export default function DashboardPage() {
     const channel = a.channel ?? '—';
     const ok =
       a.is_success === 1 || a.is_success === true ? '성공' : '실패';
-    const sent = a.sent_at
-      ? new Date(a.sent_at).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })
+    const sentRaw = a.sent_at;
+    const sent = sentRaw
+      ? new Date(/Z|[+-]\d{2}:?\d{2}$/.test(sentRaw) ? sentRaw : sentRaw + 'Z')
+          .toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })
       : '—';
     return { key: a.id ?? `${channel}-${sent}`, channel, ok, sent };
   };
