@@ -31,11 +31,11 @@ def parse_victim(data):
     author       = data.get("group")     or "Unknown Group"
     content      = clean_text(data.get("description") or "")
     published_at = parse_datetime(data.get("attackdate"))
-    victim_info  = data.get("domain")    or ""
+    victim_info  = {"domain": data.get("domain") or ""}
     original_url = data.get("claim_url") or data.get("url") or ""
     content_hash = make_hash(title, author, content)
     category     = classify_category(data)
-    tags         = data.get("group")     or ""  
+    tags         = [data.get("group")] if data.get("group") else []
 
     return {
         "title":        title,     
