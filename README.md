@@ -6,10 +6,8 @@ ransomware.live의 api를 활용한 침해사고 발생 시 알림 서비스 입
 2022.07.07 ~ 09.02
 
 2. 참여 인원
-Name	Position
-김동우	Back, Front
-김진수	Back
-박진우	Back
-최민기	Back
+| Widget    | Description                                    |
+| ---------- | ---------------------------------------------- |
+| CustomAppbar | 직접 만들어 본 커스텀 앱바입니다.                |
 3. 역할 분담
 김동우 : 여행일정 추천 기능 + Front 구성
