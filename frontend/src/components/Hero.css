@@ -1,0 +1,70 @@
+.hero {
+  @apply relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-112px)] px-4 sm:px-6 text-center;
+}
+
+.hero__title-wrapper {
+  @apply mb-5 sm:mb-8;
+}
+
+.hero__title-main {
+  @apply font-bold text-white leading-tight mb-2 drop-shadow-md;
+  font-family: 'Goldman', sans-serif;
+  font-size: clamp(28px, 6vw, 68px);
+}
+
+.hero__title-by-row {
+  @apply flex items-baseline justify-center gap-2 sm:gap-3 mt-1;
+}
+
+.hero__title-by {
+  @apply font-bold text-white drop-shadow-md;
+  font-family: 'Goldman', sans-serif;
+  font-size: clamp(22px, 5vw, 54px);
+}
+
+.hero__title-sentinel {
+  @apply text-white leading-tight drop-shadow-md;
+  font-family: 'Black Ops One', sans-serif;
+  font-size: clamp(32px, 7vw, 80px);
+}
+
+.hero__description {
+  @apply text-white/85 tracking-wide mb-8 sm:mb-14;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: clamp(14px, 2.5vw, 20px);
+}
+
+.hero__search-wrapper {
+  @apply w-full max-w-2xl px-0;
+}
+
+.hero__search-form {
+  @apply flex flex-col sm:flex-row items-stretch sm:items-center bg-white rounded-2xl px-4 sm:px-5 py-3 sm:py-2 gap-2 sm:gap-3 shadow-xl transition-all;
+}
+
+.hero__search-form--error {
+  @apply ring-2 ring-red-400;
+}
+
+.hero__search-input {
+  @apply flex-1 bg-transparent text-gray-700 placeholder-gray-400 outline-none py-2 sm:py-3;
+  font-family: 'Noto Sans KR', 'Inter', sans-serif;
+  font-size: clamp(14px, 2vw, 18px);
+}
+
+/* 모바일에서 select 너비 제한 해제 */
+select.hero__search-input {
+  @apply w-full sm:max-w-[100px];
+}
+
+.hero__search-btn {
+  @apply bg-[#1542e4] hover:bg-[#1a4ff0] active:bg-[#1238cc] text-white font-semibold rounded-xl transition-colors whitespace-nowrap shadow-md;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: clamp(13px, 1.8vw, 16px);
+  @apply px-6 py-3 sm:px-8;
+}
+
+.hero__error-msg {
+  @apply mt-2 text-left text-red-600 text-sm px-2 flex items-center gap-1;
+  font-family: 'Noto Sans KR', sans-serif;
+}

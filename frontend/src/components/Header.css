@@ -1,0 +1,42 @@
+.header {
+  @apply relative z-20 flex items-center justify-between px-4 sm:px-10 lg:px-16 py-5 sm:py-8;
+}
+
+.header__logo {
+  @apply text-3xl sm:text-5xl text-white tracking-wide hover:opacity-75 transition-opacity select-none;
+  font-family: 'Black Ops One', sans-serif;
+}
+
+/* 데스크탑 nav */
+.header__nav {
+  @apply hidden md:flex items-center gap-5 lg:gap-10;
+}
+
+.header__nav-link {
+  @apply text-[15px] lg:text-[17px] font-medium transition-colors whitespace-nowrap text-white/75 hover:text-white;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.header__nav-link--active {
+  @apply text-white font-semibold underline underline-offset-4;
+}
+
+/* 햄버거 버튼 (모바일) */
+.header__hamburger {
+  @apply flex md:hidden items-center justify-center text-white p-1;
+}
+
+/* 모바일 드롭다운 메뉴 */
+.header__mobile-menu {
+  @apply absolute top-full left-0 right-0 z-50 flex flex-col gap-0
+         bg-blue-950/95 backdrop-blur-md border-t border-white/10
+         md:hidden;
+}
+
+.header__mobile-menu .header__nav-link {
+  @apply px-6 py-4 border-b border-white/10 text-base;
+}
+
+.header__mobile-menu .header__nav-link:last-child {
+  @apply border-b-0;
+}
